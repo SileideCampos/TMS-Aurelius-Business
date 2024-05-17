@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{44F9CFFC-9BEE-4689-8DA4-8001A927C7FD}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="TMSWeb.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PackageEntities.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="TMSWeb">
+        <MSBuild Projects="TMSWeb.dproj"/>
+    </Target>
+    <Target Name="TMSWeb:Clean">
+        <MSBuild Projects="TMSWeb.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TMSWeb:Make">
+        <MSBuild Projects="TMSWeb.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PackageEntities">
+        <MSBuild Projects="PackageEntities.dproj"/>
+    </Target>
+    <Target Name="PackageEntities:Clean">
+        <MSBuild Projects="PackageEntities.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PackageEntities:Make">
+        <MSBuild Projects="PackageEntities.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="TMSWeb;PackageEntities"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="TMSWeb:Clean;PackageEntities:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="TMSWeb:Make;PackageEntities:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
